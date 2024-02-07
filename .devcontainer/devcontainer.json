@@ -1,0 +1,14 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+{
+  "name": "StableDiffusion",
+  
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  // マウントするとダウンロードは初回のみとなるがモデルのメモリロードに時間がかかる（Volumeでも同様）
+  "mounts": [
+    {"type":"bind","source":"${localWorkspaceFolder}/hfCache", "target":"/root/.cache/huggingface", "consistency": "delegated"}
+    // {"type":"volume","source":"hfCache", "target":"/root/.cache/huggingface", "consistency": "delegated"},
+  ],
+  "runArgs": ["--gpus", "all","--shm-size","16gb"]
+}
